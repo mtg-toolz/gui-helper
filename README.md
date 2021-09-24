@@ -1,6 +1,6 @@
 # GUI tool for Proximity
 
-Things may break or change with proximity, I have a life and family so I will do my best to fix it but pull requests are always welcomed!
+Things may break or change with proximity, I have a life and family so I will do my best to fix it but pull requests are always welcomed! The backend being in rust means its easy to extend this tool to work with almost any language using FFI or sending cli's. 
 
 # Local setup
 

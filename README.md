@@ -16,7 +16,16 @@ npm run tauri build
 
 Creates the command line based on options and file locations
 
-Checks for Java is installed (TODO)
+Checks for Java is installed (X)
+
+Figure out how to not use default path for Java (TODO)
+Figure out default path for macos for Java in mean time (TODO)
+
+Create cmd object for options selected (X)
+
+Send object to rust (TODO)
+Send path to rust (TODO)
+Exec command in rust (TODO)
 
 Helps you pick your deck list and ensures it is in the correct format (TODO)
 

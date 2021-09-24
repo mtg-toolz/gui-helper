@@ -50,20 +50,32 @@ export const Options = () => {
           <FormLabel htmlFor='official_art' w='100%' mb='0'>
             Use Official Art
           </FormLabel>
-          <Switch onChange={setValue} colorScheme='teal' id='official_art' />
+          <Switch
+            onChange={(e) =>
+              setValue({ ...value, use_official_art: e.target.checked })
+            }
+            colorScheme='teal'
+            id='official_art'
+          />
         </FormControl>
         <FormControl display='flex' alignItems='center'>
           <FormLabel htmlFor='reminder_text' w='100%' mb='0'>
             Reminder Text
           </FormLabel>
-          <Switch onChange={setValue} colorScheme='teal' id='reminder_text' />
+          <Switch
+            onChange={(e) =>
+              setValue({ ...value, reminder_text: e.target.checked })
+            }
+            colorScheme='teal'
+            id='reminder_text'
+          />
         </FormControl>
         <FormControl display='flex' alignItems='center'>
           <FormLabel htmlFor='debug' w='100%' mb='0'>
             Debug
           </FormLabel>
           <Switch
-            onChange={() => setValue({ ...value, debug: true })}
+            onChange={(e) => setValue({ ...value, debug: e.target.checked })}
             colorScheme='teal'
             id='debug'
           />
@@ -72,25 +84,45 @@ export const Options = () => {
           <FormLabel htmlFor='threads' w='100%' mb='0'>
             Threads
           </FormLabel>
-          <Switch onChange={setValue} colorScheme='teal' id='threads' />
+          <Switch
+            onChange={(e) => setValue({ ...value, threads: e.target.checked })}
+            colorScheme='teal'
+            id='threads'
+          />
         </FormControl>
         <FormControl display='flex' alignItems='center'>
           <FormLabel htmlFor='border' w='100%' mb='0'>
             Border
           </FormLabel>
-          <Switch onChange={setValue} colorScheme='teal' id='border' />
+          <Switch
+            onChange={(e) => setValue({ ...value, border: e.target.checked })}
+            colorScheme='teal'
+            id='border'
+          />
         </FormControl>
         <FormControl display='flex' alignItems='center'>
           <FormLabel htmlFor='artist_outline' w='100%' mb='0'>
             Artist Outline
           </FormLabel>
-          <Switch onChange={setValue} colorScheme='teal' id='artist_outline' />
+          <Switch
+            onChange={(e) =>
+              setValue({ ...value, artist_outline: e.target.checked })
+            }
+            colorScheme='teal'
+            id='artist_outline'
+          />
         </FormControl>
         <FormControl display='flex' alignItems='center'>
           <FormLabel htmlFor='copyright' w='100%' mb='0'>
             Copyright
           </FormLabel>
-          <Switch onChange={setValue} colorScheme='teal' id='copyright' />
+          <Switch
+            onChange={(e) =>
+              setValue({ ...value, copyright: e.target.checked })
+            }
+            colorScheme='teal'
+            id='copyright'
+          />
         </FormControl>
         <Button
           leftIcon={<FaGitkraken />}

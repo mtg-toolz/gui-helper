@@ -16,6 +16,7 @@ import {
   SliderFilledTrack,
   SliderTrack,
   SliderThumb,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { open } from '@tauri-apps/api/dialog';
 import { readDir } from '@tauri-apps/api/fs';
@@ -24,6 +25,7 @@ import { FaFolderOpen, FaGitkraken } from 'react-icons/fa';
 import { useToast } from '@chakra-ui/react';
 
 export const Options = () => {
+  const color = useColorModeValue('black', 'teal');
   const [value, setValue] = useState({
     useOfficialArt: false,
     reminderText: false,
@@ -39,6 +41,7 @@ export const Options = () => {
   const [isZip, setZip] = useState(false);
   const [isTemp, setTemp] = useState(false);
   const [isTxt, setTxt] = useState(false);
+  const [deckFile, setDeck] = useState('');
   const toast = useToast();
   const regexZip = new RegExp('template.zip', 'gm');
   const regexTemp = new RegExp('(?=template)^((?!zip).)*$', 'gm');
@@ -63,16 +66,15 @@ export const Options = () => {
     } = value;
     invoke('exec_proximity', {
       folderLoc: folderLoc,
-      isTxt: JSON.stringify(isTxt),
+      deckFile: deckFile,
       isZip: JSON.stringify(isZip),
-      isTemp: JSON.stringify(isTemp),
       useOfficialArt: JSON.stringify(useOfficialArt),
       reminderText: JSON.stringify(reminderText),
       debugOp: JSON.stringify(debugOp),
       threadsOp: JSON.stringify(threadCount),
       borderOp: borderOp,
       artistOutline: JSON.stringify(artistOutline),
-      copyRight: JSON.stringify(copyRight),
+      copyrightOp: JSON.stringify(copyRight),
     });
 
     //reset encase users had issues
@@ -120,6 +122,7 @@ export const Options = () => {
         }
         if (regexTxt.test(file.name)) {
           console.log('txt check');
+          setDeck(file.name);
           setTxt(true);
         }
       });
@@ -159,7 +162,7 @@ export const Options = () => {
         <Button
           leftIcon={<FaFolderOpen />}
           size='md'
-          colorScheme='teal'
+          colorScheme={color}
           variant='outline'
           w='180px'
           type='submit'
@@ -274,7 +277,7 @@ export const Options = () => {
           leftIcon={<FaGitkraken />}
           size='md'
           w='180px'
-          colorScheme='teal'
+          colorScheme={color}
           variant='outline'
           type='submit'
           isDisabled={!folderLoc}

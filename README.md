@@ -33,11 +33,13 @@ Send object to rust (X)
 
 Send path to rust (X)
 
-Exec command in rust (TODO)
+Exec command in rust (X)
 
 Helps you pick your deck list and ensures it is in the correct format (TODO)
 
-Checks for template zip or folder (TODO)
+Checks for template zip or folder (X)
+
+Check what template options they have and have them select what one they want to use via dropdown (TODO)
 
 Generates a xml card list to use with autofill tool (TODO)
 

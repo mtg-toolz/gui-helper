@@ -1,4 +1,5 @@
-import { Text, theme, ChakraProvider } from '@chakra-ui/react';
+import { Text, theme, ChakraProvider, Link, HStack } from '@chakra-ui/react';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 import { Hero } from './components/Hero';
 import { Container } from './components/Container';
 import { DarkModeSwitch } from './components/DarkModeSwitch';
@@ -12,7 +13,21 @@ const App = () => (
       <Options />
       <DarkModeSwitch />
       <Footer>
-        <Text>❤️ Chakra & Tauri</Text>
+        <HStack spacing='10px'>
+          <Link
+            color='blue'
+            href='https://github.com/Haven-King/Proximity/releases'
+            isExternal
+          >
+            ❤️ Proximity(Haven-King)
+          </Link>
+          <Link color='blue' href='https://chakra-ui.com/' isExternal>
+            & Chakra UI
+          </Link>
+          <Link color='blue' href='https://tauri.studio/en/' isExternal>
+            & Tauri
+          </Link>
+        </HStack>
       </Footer>
     </Container>
   </ChakraProvider>

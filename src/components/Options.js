@@ -28,54 +28,105 @@ export const Options = () => {
     useOfficialArt: false,
     reminderText: false,
     debugOp: false,
-    threadsOp: false,
-    borderOp: false,
+    borderOp: 'black',
     artistOutline: false,
     copyRight: false,
   });
   const [isJava, setJava] = useState(true);
   const [folderLoc, setFolder] = useState(false);
-  const [threadCount, setThreads] = React.useState(10);
+  const [threadCount, setThreads] = useState(10);
+  const [fileList, setFiles] = useState(null);
+  const [isZip, setZip] = useState(false);
+  const [isTemp, setTemp] = useState(false);
+  const [isTxt, setTxt] = useState(false);
   const toast = useToast();
+  const regexZip = new RegExp('template.zip', 'gm');
+  const regexTemp = new RegExp('(?=template)^((?!zip).)*$', 'gm');
+  const regexTxt = new RegExp('.txt', 'g');
 
+  //Checks for java on load to enable or disable buttons
   useEffect(() => {
     checkForJava();
   }, []);
 
+  /**
+   * Send values to rust backend to create the cli command based on users selections and normal default options.
+   */
   const handleSubmit = async () => {
     const {
       useOfficialArt,
       reminderText,
       debugOp,
-      threadsOp,
       borderOp,
       artistOutline,
       copyRight,
     } = value;
     invoke('exec_proximity', {
       folderLoc: folderLoc,
+      isTxt: JSON.stringify(isTxt),
+      isZip: JSON.stringify(isZip),
+      isTemp: JSON.stringify(isTemp),
       useOfficialArt: JSON.stringify(useOfficialArt),
       reminderText: JSON.stringify(reminderText),
       debugOp: JSON.stringify(debugOp),
-      threadsOp: JSON.stringify(threadsOp),
-      borderOp: JSON.stringify(borderOp),
+      threadsOp: JSON.stringify(threadCount),
+      borderOp: borderOp,
       artistOutline: JSON.stringify(artistOutline),
       copyRight: JSON.stringify(copyRight),
     });
+
+    //reset encase users had issues
+    setFolder(false);
+    setFiles(null);
+    setTemp(false);
+    setZip(false);
+    setTxt(false);
   };
 
+  //Handle for thread slider value change
   const handleChange = (count) => setThreads(count);
 
+  /**
+   * Simply grabs the folder the user selects
+   */
   const handleClick = async () => {
     const file_loc = await open({ multiple: false, directory: true });
+    let files;
     if (file_loc) {
-      console.log(file_loc);
-      const files = await readDir(file_loc);
-      console.log(files);
+      files = await readDir(file_loc);
+      setFiles(files);
     }
     setFolder(file_loc);
+    await checkForFiles(files);
+    console.log(isTemp, isZip, isTxt);
   };
 
+  /**
+   * Checking for file template and text file for deck lists.
+   */
+  const checkForFiles = async (files) => {
+    if (files) {
+      files = files.flat();
+      files.forEach((file) => {
+        console.log(file.name);
+        //check for temp folder if true check for if it is zipped.
+        if (regexTemp.test(file.name)) {
+          console.log('temp check');
+          setTemp(true);
+        }
+        if (regexZip.test(file.name)) {
+          console.log('zip check');
+          setZip(true);
+        }
+        if (regexTxt.test(file.name)) {
+          console.log('txt check');
+          setTxt(true);
+        }
+      });
+    }
+  };
+
+  //Will check for java in the rust backend and based on response alert the user: DOES NOT CARE ABOUT VER CURRENTLY!
   const checkForJava = () => {
     invoke('check_for_java')
       .then((res) => {
@@ -101,6 +152,7 @@ export const Options = () => {
       .catch((e) => console.error(e));
   };
 
+  //Main render that likely should be broken up : TODO
   return (
     <>
       <VStack spacing='15px'>

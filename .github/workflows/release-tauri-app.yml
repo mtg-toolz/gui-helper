@@ -28,7 +28,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y webkit2gtk-4.0
-      - run: npm
       - name: build gui-helper for tauri app
         run: npm run build
       - run: cargo install tauri-bundler --force
@@ -100,7 +99,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y webkit2gtk-4.0
-      - run: npm
       - name: build nota for tauri app
         run: npm run build
       - run: cargo install tauri-bundler --force

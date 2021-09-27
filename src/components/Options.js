@@ -67,7 +67,7 @@ export const Options = () => {
       artistOutline,
       copyRight,
     } = value;
-    invoke('exec_proximity', {
+    await invoke('exec_proximity', {
       folderLoc: folderLoc,
       proximity: prox_ver,
       deckFile: deckFile,

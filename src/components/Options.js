@@ -42,11 +42,13 @@ export const Options = () => {
   const [isZip, setZip] = useState(false);
   const [isTemp, setTemp] = useState(false);
   const [isTxt, setTxt] = useState(false);
+  const [prox_ver, setProx] = useState('');
   const [deckFile, setDeck] = useState('');
   const toast = useToast();
   const regexZip = new RegExp('template.zip', 'gm');
   const regexTemp = new RegExp('(?=template)^((?!zip).)*$', 'gm');
   const regexTxt = new RegExp('.txt', 'g');
+  const regexProxy = new RegExp('proximity.*(?=jar)', 'gmi');
 
   //Checks for java on load to enable or disable buttons
   useEffect(() => {
@@ -67,6 +69,7 @@ export const Options = () => {
     } = value;
     invoke('exec_proximity', {
       folderLoc: folderLoc,
+      proximity: prox_ver,
       deckFile: deckFile,
       isZip: JSON.stringify(isZip),
       useOfficialArt: JSON.stringify(useOfficialArt),
@@ -117,6 +120,9 @@ export const Options = () => {
         if (regexTemp.test(file.name)) {
           console.log('temp check');
           setTemp(true);
+        }
+        if (regexProxy.test(file.name)) {
+          setProx(file.name);
         }
         if (regexZip.test(file.name)) {
           console.log('zip check');

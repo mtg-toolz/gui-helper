@@ -1,5 +1,4 @@
-import { Text, theme, ChakraProvider, Link, HStack } from '@chakra-ui/react';
-import { FaExternalLinkAlt } from 'react-icons/fa';
+import { theme, ChakraProvider, Link, HStack } from '@chakra-ui/react';
 import { Hero } from './components/Hero';
 import { Container } from './components/Container';
 import { DarkModeSwitch } from './components/DarkModeSwitch';

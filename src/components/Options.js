@@ -38,6 +38,7 @@ export const Options = () => {
   const [isJava, setJava] = useState(true);
   const [folderLoc, setFolder] = useState(false);
   const [threadCount, setThreads] = useState(10);
+  // eslint-disable-next-line no-unused-vars
   const [fileList, setFiles] = useState(null);
   const [isZip, setZip] = useState(false);
   const [isTemp, setTemp] = useState(false);
@@ -53,6 +54,7 @@ export const Options = () => {
   //Checks for java on load to enable or disable buttons
   useEffect(() => {
     checkForJava();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /**

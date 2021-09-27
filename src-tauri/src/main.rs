@@ -7,13 +7,20 @@ use std::io::{self, Write};
 
 #[tauri::command]
 fn exec_proximity(folder_loc: String, proximity: String, deck_file: String,  use_official_art: String, reminder_text: String, debug_op: String, threads_op: String, border_op: String, artist_outline: String, copyright_op: String ) { 
-  // let str_options = format!("--use_official_art={} --copyright={} --reminder_text={} --debug={} --copyright_op={} --threads={}", use_official_art, copyright_op, reminder_text, debug_op, copyright_op, threads_op); 
   let cmd = format!("--cards={}", deck_file);
   let art = format!("--use_official_art={}", use_official_art);
   let copy = format!("--copyright={}", copyright_op);
+  let reminder_text = format!("--reminder_text={}", reminder_text);
+  let threads = format!("--threads={}", threads_op);
+  let debug = format!("--debug={}", debug_op);
+  let mut border = "black"; 
+  if border_op == "false" { 
+    border = "none"
+  }
+
   let proxy_ver = format!("{}", proximity);
   let output = Command::new("java")
-  .args(&["-jar", &proxy_ver, "--template=normal", &cmd, &art, &copy])
+  .args(&["-jar", &proxy_ver, "--template=normal", &cmd, &art, &copy, &reminder_text, &threads, &debug, &border])
   .output()
   .expect("failed to run proximity");
   // .status()

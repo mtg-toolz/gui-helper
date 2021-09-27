@@ -31,7 +31,7 @@ export const Options = () => {
     useOfficialArt: false,
     reminderText: false,
     debugOp: false,
-    borderOp: 'black',
+    borderOp: false,
     artistOutline: false,
     copyRight: false,
   });
@@ -78,7 +78,7 @@ export const Options = () => {
       reminderText: JSON.stringify(reminderText),
       debugOp: JSON.stringify(debugOp),
       threadsOp: JSON.stringify(threadCount),
-      borderOp: borderOp,
+      borderOp: JSON.stringify(borderOp),
       artistOutline: JSON.stringify(artistOutline),
       copyrightOp: JSON.stringify(copyRight),
     });

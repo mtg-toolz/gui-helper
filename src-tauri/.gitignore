@@ -2,3 +2,8 @@
 # will have compiled files and executables
 /target/
 WixTools
+images
+templates
+proximity-0.2.1.jar
+test.txt
+normal

@@ -2,6 +2,19 @@
 
 Things may break or change with proximity, I have a life and family so I will do my best to fix it but pull requests are always welcomed! The backend being in rust means its easy to extend this tool to work with almost any language using FFI or sending cli's.
 
+# Local setup from .msi
+
+Download and install the msi into a folder
+Add proximity.jar to the folder
+Add the template folder unzipped to the same folder
+Add your deck list as a text file
+When done it should look like this
+![example!](./example.png)
+
+- Run gui-helper
+- Click on proximity location and select the folder you made above.
+- Selected options turn things on they default to false (off)
+
 # Local setup from source
 
 So first things first this is not built for people to run locally if you don't have some tech knowledge. I will do my best to walk you through all of this as if you had none. Some things you need need installed are the following. Node 14, Visual Studios C++ build tools 2019! uninstall 2017 if you have issues, RustC and Cargo package manager (rustup) makes this easy. Lastly you need to install webview2 and your ready to go to the next steps.

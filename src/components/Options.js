@@ -21,6 +21,7 @@ import {
 import { open } from '@tauri-apps/api/dialog';
 import { readDir } from '@tauri-apps/api/fs';
 import { invoke } from '@tauri-apps/api/tauri';
+import { currentDir } from '@tauri-apps/api/path';
 import { FaFolderOpen, FaGitkraken } from 'react-icons/fa';
 import { useToast } from '@chakra-ui/react';
 
@@ -92,6 +93,7 @@ export const Options = () => {
    * Simply grabs the folder the user selects
    */
   const handleClick = async () => {
+    console.log(await currentDir());
     const file_loc = await open({ multiple: false, directory: true });
     let files;
     if (file_loc) {
@@ -171,7 +173,7 @@ export const Options = () => {
         >
           Proximity location
         </Button>
-        {/* <FormControl display='flex' alignItems='center'>
+        <FormControl display='flex' alignItems='center'>
           <FormLabel htmlFor='official_art' w='100%' mb='0'>
             Use Official Art
           </FormLabel>
@@ -182,7 +184,7 @@ export const Options = () => {
             colorScheme='teal'
             id='official_art'
           />
-        </FormControl> */}
+        </FormControl>
         <FormControl display='flex' alignItems='center'>
           <FormLabel htmlFor='reminder_text' w='100%' mb='0'>
             Reminder Text
@@ -205,16 +207,16 @@ export const Options = () => {
             id='debug'
           />
         </FormControl>
-        {/* <FormControl display='flex' alignItems='center'>
+        <FormControl display='flex' alignItems='center'>
           <FormLabel htmlFor='border' w='100%' mb='0'>
-            Border
+            Border None
           </FormLabel>
           <Switch
             onChange={(e) => setValue({ ...value, borderOp: e.target.checked })}
             colorScheme='teal'
             id='border'
           />
-        </FormControl> */}
+        </FormControl>
         {/* <FormControl display='flex' alignItems='center'>
           <FormLabel htmlFor='artist_outline' w='100%' mb='0'>
             Artist Outline

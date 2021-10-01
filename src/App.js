@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { theme, ChakraProvider } from '@chakra-ui/react';
 import {
   BrowserRouter as Router,

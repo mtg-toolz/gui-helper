@@ -1,34 +1,28 @@
-import { theme, ChakraProvider, Link, HStack } from '@chakra-ui/react';
-import { Hero } from './components/Hero';
-import { Container } from './components/Container';
-import { DarkModeSwitch } from './components/DarkModeSwitch';
-import { Footer } from './components/Footer';
-import { Options } from './components/Options';
+import { theme, ChakraProvider } from '@chakra-ui/react';
+import {
+  BrowserRouter as Router,
+  Link as RouterLink,
+  Switch,
+  Route,
+} from 'react-router-dom';
+import ImageView from './components/ImageView';
+import Main from './components/Main';
 
 const App = () => (
   <ChakraProvider theme={theme}>
-    <Container height='100vh'>
-      <Hero />
-      <Options />
-      <DarkModeSwitch />
-      <Footer>
-        <HStack spacing='10px'>
-          <Link
-            color='blue'
-            href='https://github.com/Haven-King/Proximity/releases'
-            isExternal
-          >
-            ❤️ Proximity(Haven-King)
-          </Link>
-          <Link color='blue' href='https://chakra-ui.com/' isExternal>
-            & Chakra UI
-          </Link>
-          <Link color='blue' href='https://tauri.studio/en/' isExternal>
-            & Tauri
-          </Link>
-        </HStack>
-      </Footer>
-    </Container>
+    <Router>
+      {/* <RouterLink to='/'>Home</RouterLink>
+      <RouterLink to='/cardselect'>Card Selector</RouterLink> */}
+      <Switch>
+        <Route exact path='/'>
+          <Main />
+        </Route>
+        <Route path='/cardselect'>
+          <ImageView />
+        </Route>
+      </Switch>
+    </Router>
+    ;
   </ChakraProvider>
 );
 

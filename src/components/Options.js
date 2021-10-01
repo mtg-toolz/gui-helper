@@ -28,9 +28,10 @@ import { useToast } from '@chakra-ui/react';
 export const Options = () => {
   const color = useColorModeValue('black', 'teal');
   const [value, setValue] = useState({
-    useOfficialArt: false,
+    useOfficialArt: true,
     reminderText: false,
     debugOp: false,
+    setSymbol: true,
     borderOp: false,
     artistOutline: false,
     copyRight: false,
@@ -43,6 +44,7 @@ export const Options = () => {
   const [isZip, setZip] = useState(false);
   const [isTemp, setTemp] = useState(false);
   const [isTxt, setTxt] = useState(false);
+  const [isDone, setDone] = useState(false);
   const [prox_ver, setProx] = useState('');
   const [deckFile, setDeck] = useState('');
   const toast = useToast();
@@ -63,13 +65,15 @@ export const Options = () => {
   const handleSubmit = async () => {
     const {
       useOfficialArt,
+      setSymbol,
       reminderText,
       debugOp,
       borderOp,
       artistOutline,
       copyRight,
     } = value;
-    await invoke('exec_proximity', {
+    invoke('exec_proximity', {
+      setSymbol: JSON.stringify(setSymbol),
       folderLoc: folderLoc,
       proximity: prox_ver,
       deckFile: deckFile,
@@ -81,7 +85,28 @@ export const Options = () => {
       borderOp: JSON.stringify(borderOp),
       artistOutline: JSON.stringify(artistOutline),
       copyrightOp: JSON.stringify(copyRight),
-    });
+    })
+      .then((res) => {
+        if (res) {
+          toast({
+            title: 'Proximity Ran',
+            description: 'Proximity ran successfully!',
+            status: 'success',
+            duration: 4000,
+            isClosable: true,
+          });
+          setDone(true);
+        } else {
+          toast({
+            title: 'Proximity Ran',
+            description: 'Proximity failed!',
+            status: 'error',
+            duration: 4000,
+            isClosable: true,
+          });
+        }
+      })
+      .catch((e) => console.error(e));
 
     //reset encase users had issues
     setFolder(false);
@@ -165,6 +190,10 @@ export const Options = () => {
       .catch((e) => console.error(e));
   };
 
+  const handleOrder = async () => {
+    await invoke('make_xml');
+  };
+
   //Main render that likely should be broken up : TODO
   return (
     <>
@@ -186,11 +215,25 @@ export const Options = () => {
             Use Official Art
           </FormLabel>
           <Switch
+            isChecked
             onChange={(e) =>
               setValue({ ...value, useOfficialArt: e.target.checked })
             }
             colorScheme='teal'
             id='official_art'
+          />
+        </FormControl>
+        <FormControl display='flex' alignItems='center'>
+          <FormLabel htmlFor='set_symbol' w='100%' mb='0'>
+            Set Symbol
+          </FormLabel>
+          <Switch
+            isChecked
+            onChange={(e) =>
+              setValue({ ...value, setSymbol: e.target.checked })
+            }
+            colorScheme='teal'
+            id='set_symbol'
           />
         </FormControl>
         <FormControl display='flex' alignItems='center'>
@@ -295,6 +338,19 @@ export const Options = () => {
         >
           Run proximity!
         </Button>
+        {isDone ? (
+          <Button
+            leftIcon={<FaGitkraken />}
+            size='md'
+            w='180px'
+            colorScheme={color}
+            variant='outline'
+            type='submit'
+            onClick={handleOrder}
+          >
+            Make Order!
+          </Button>
+        ) : null}
       </VStack>
     </>
   );

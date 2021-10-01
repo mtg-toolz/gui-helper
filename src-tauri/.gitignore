@@ -4,6 +4,15 @@
 WixTools
 images
 templates
-proximity-0.2.1.jar
-test.txt
 normal
+.env
+myapp.key
+myapp.key.pub
+
+# testing stuff
+cards
+chill
+autofill.exe
+proximity-0.3.2.jar
+test.txt
+cards.xml

@@ -4,8 +4,13 @@ Things may break or change with proximity, I have a life and family so I will do
 
 # Local setup from .msi
 
+MUST HAVE JAVA 16+ installed and Python 3 installed before running!
+
 Download and install the msi into a folder
-Add proximity.jar to the folder
+Add proximity.jar to the folder link in app
+Add autofill.exe to the folder link in app
+Add cardxml to the folder can be found in this repo
+Add a cardback.png img (but be named cardback!) can be found in this repo
 Add the template folder unzipped to the same folder
 Add your deck list as a text file
 When done it should look like this

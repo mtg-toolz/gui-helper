@@ -6,14 +6,14 @@ Things may break or change with proximity, I have a life and family so I will do
 
 MUST HAVE JAVA 16+ installed and Python 3 installed before running!
 
-Download and install the msi into a folder
-Add proximity.jar to the folder link in app
-Add autofill.exe to the folder link in app
-Add cardxml to the folder can be found in this repo
-Add a cardback.png img (but be named cardback!) can be found in this repo
-Add the template folder unzipped to the same folder
-Add your deck list as a text file
-When done it should look like this
+* Download and install the msi into a folder from the release page this is built via github action from source(automagically), please fill free to use virustotal, sandboxie or build it yourself if you want
+* Download/Add proximity.jar to the folder link [here](https://github.com/Haven-King/Proximity/releases)
+* Download/Add the template folder(chillis) from the above link and unzipped to the same folder
+* Download/Add autofill.exe to the folder link [here](https://github.com/chilli-axe/mpc-autofill/releases)
+* Download/Add cardxml to the folder can be found [here](https://github.com/Tarnop/CardXML)
+* Add a cardback.png img (but be named cardback!) can get this from a lot of places 
+* Add your deck list as a text file must follow proximity format follow the wiki for proximity if unsure 
+When done it should look like this * might have a different version that is fine!
 ![example!](./example.png)
 
 - Run gui-helper
